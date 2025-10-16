@@ -1,4 +1,10 @@
 import express from 'express';
+import dotenv from 'dotenv';
+dotenv.config();
+import Connect from './db/dbconnect.js';
+
+Connect();
+import router from './routes/authroutes.js';
 const app = express();
 const PORT = 3000;
 
@@ -13,6 +19,8 @@ app.post('/data',(req,res)=>{
     console.log(data);
     res.send('POST request to the homepage');
 })
+
+app.use('/api/auth',router,()=>{console.log("Auth route")});
 
 
 app.listen(PORT, () => {
