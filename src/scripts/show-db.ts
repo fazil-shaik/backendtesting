@@ -1,7 +1,7 @@
 import dotenv from 'dotenv';
 dotenv.config();
 import mongoose from 'mongoose';
-import User from '../src/models/User.Model.js';
+import User from '../models/User.Model.js';
 
 async function run() {
   try {
