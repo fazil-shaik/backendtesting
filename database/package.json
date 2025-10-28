@@ -1,22 +1,20 @@
 {
   "name": "database",
   "version": "1.0.0",
+  "description": "",
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "dev":"nodemon index.js",
+    "start": "nodemon server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "description": "",
   "dependencies": {
     "dotenv": "^17.2.3",
+    "express": "^5.1.0",
     "nodemon": "^3.1.10",
     "pg": "^8.16.3"
-  },
-  "devDependencies": {
-    "@types/pg": "^8.15.5"
   }
 }

@@ -1,21 +1,19 @@
-import { Pool } from "pg";
-import dotenv from "dotenv";
-
+import pkg from 'pg';
+const { Pool } = pkg;
+import dotenv from 'dotenv';
 dotenv.config();
-
+// Connection pool setup
 const pool = new Pool({
-  user: process.env.PG_USER,
-  host: process.env.PG_HOST,
-  database: process.env.PG_DATABASE,
-  password: process.env.PG_PASSWORD,
-  port: Number(process.env.PG_PORT),
+  user: process.env.USERNAME,
+  host: process.env.HOST,
+  database: process.env.DB_NAME,
+  password: process.env.PASSWORD,
+  port: process.env.PORT,
 });
 
+// Test the connection
 pool.connect()
-  .then(client => {
-    console.log("Connected to PostgreSQL successfully!");
-    client.release();
-  })
-  .catch(err => console.error("Connection error", err.stack));
+  .then(() => console.log('✅ Connected to PostgreSQL'))
+  .catch(err => console.error('❌ Connection error', err));
 
 export default pool;
