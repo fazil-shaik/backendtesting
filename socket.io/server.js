@@ -82,22 +82,43 @@ const io = new Server(server, {
   },
 });
 
+// io.on("connection", (socket) => {
+//   console.log("⚡ User connected:", socket.id);
+
+//   socket.on("join_room", (room) => {
+//     socket.join(room);
+//     console.log(`🚪 User ${socket.id} joined room: ${room}`);
+//   })
+
+//   socket.send("send_room_message",({room,message,sender})=>{
+//     console.log(`Message from ${sender} to room ${room}: ${message}`);
+//     io.to(room).emit("receive_room_message",{message,sender})
+//   });
+
+//   socket.on("send_message", (data) => {
+//     console.log("📨 Received message:", data);
+//     io.emit("receive_message", data); // Broadcast to all clients
+//   });
+
+//   socket.on("disconnect", () => {
+//     console.log("❌ User disconnected:", socket.id);
+//   });
+// });
+
+
 io.on("connection", (socket) => {
   console.log("⚡ User connected:", socket.id);
 
+  // Join a room
   socket.on("join_room", (room) => {
     socket.join(room);
-    console.log(`🚪 User ${socket.id} joined room: ${room}`);
-  })
-
-  socket.send("send_room_message",({room,message,sender})=>{
-    console.log(`Message from ${sender} to room ${room}: ${message}`);
-    io.to(room).emit("receive_room_message",{message,sender})
+    console.log(`📥 ${socket.id} joined room ${room}`);
   });
-  
-  socket.on("send_message", (data) => {
-    console.log("📨 Received message:", data);
-    io.emit("receive_message", data); // Broadcast to all clients
+
+  // Send message to a room
+  socket.on("send_room_message", ({ room, message, sender }) => {
+    console.log(`💬 Message to room ${room}:`, message);
+    io.to(room).emit("receive_room_message", { sender, message });
   });
 
   socket.on("disconnect", () => {
