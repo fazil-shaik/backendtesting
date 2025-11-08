@@ -1,0 +1,10 @@
+[project]
+name = "crewai-workspace"
+version = "0.0.1"
+description = "Local workspace wrapper project for crewai examples"
+
+# Dependencies must be a sequence per PEP 621
+dependencies = ["crewai"]
+
+[tool]
+# placeholder section for tools (kept minimal to satisfy CLI checks)
